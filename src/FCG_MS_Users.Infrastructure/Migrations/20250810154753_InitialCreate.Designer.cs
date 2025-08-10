@@ -3,17 +3,20 @@ using System;
 using FCG_MS_Users.Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace FCG_MS_Users.Infra.Persistence.Migrations
+namespace FCG_MS_Users.Infrastructure.Migrations
 {
     [DbContext(typeof(UserRegistrationDbContext))]
-    partial class UserRegistrationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250810154753_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

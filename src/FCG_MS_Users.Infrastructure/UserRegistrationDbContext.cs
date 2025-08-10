@@ -23,7 +23,9 @@ public class UserRegistrationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Set default schema for all entities
-        modelBuilder.HasDefaultSchema("game_platform");
+        modelBuilder.HasDefaultSchema("fcg_user");
+
+        modelBuilder.HasAnnotation("Relational:HistoryTableSchema", "fcg_user");
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserRegistrationDbContext).Assembly);
 

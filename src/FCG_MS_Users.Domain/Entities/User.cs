@@ -4,7 +4,7 @@ using FCG_MS_Users.Domain.ValueObjects;
 namespace FCG_MS_Users.Domain.Entities;
 
 /// <summary>
-/// Represents a user in the digital game platform
+/// Represents a user in the digital fcg user
 /// </summary>
 public class User
 {

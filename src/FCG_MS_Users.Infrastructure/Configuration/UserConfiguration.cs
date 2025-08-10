@@ -2,7 +2,7 @@ using FCG_MS_Users.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace UserReFCG_MS_UsersgistrationAndGameLibrary.Infra.Configuration;
+namespace UserReFCG_MS_User.Infra.Configuration;
 
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {

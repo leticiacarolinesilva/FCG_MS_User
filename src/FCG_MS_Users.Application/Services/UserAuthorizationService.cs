@@ -36,6 +36,12 @@ public class UserAuthorizationService : IUserAuthorizationService
             if (responseUser is null)
                 return "User does not exist";
 
+            var isPasswordValid = responseUser.Password.Verify(request.Password);
+            if (!isPasswordValid)
+            {
+                return "Invalid credentials";
+            }
+
             var responseUserAuth = await _userAuthorizationRepository.GetByIdAsync(responseUser.Id);
 
             if (responseUserAuth is null)

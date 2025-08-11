@@ -1,9 +1,14 @@
+using FCG_MS_Users.Api.Controllers.FluentValidators;
 using FCG_MS_Users.Api.Extensions;
+using FCG_MS_Users.Application.Dtos;
 using FCG_MS_Users.Infra;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,6 +71,16 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+
+builder.Services.AddFluentValidationAutoValidation(options =>
+{
+    options.DisableDataAnnotationsValidation = true;
+});
+
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+builder.Services.AddTransient<IValidator<RegisterUserDto>, RegisterUserValidator>();
 
 var app = builder.Build();
 

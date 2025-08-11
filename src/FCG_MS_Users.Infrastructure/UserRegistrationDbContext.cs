@@ -25,7 +25,7 @@ public class UserRegistrationDbContext : DbContext
         // Set default schema for all entities
         modelBuilder.HasDefaultSchema("fcg_user");
 
-        modelBuilder.HasAnnotation("Relational:HistoryTableSchema", "fcg_user");
+        //modelBuilder.HasAnnotation("Relational:HistoryTableSchema", "fcg_user");
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserRegistrationDbContext).Assembly);
 

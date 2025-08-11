@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace FCG_MS_Users.Infra.Persistence.Migrations
+namespace FCG_MS_Users.Infrastructure.Migrations
 {
     [DbContext(typeof(UserRegistrationDbContext))]
     partial class UserRegistrationDbContextModelSnapshot : ModelSnapshot

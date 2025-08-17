@@ -52,6 +52,7 @@ public class UserController : ControllerBase
     /// Get user by email, requires an Admin token
     /// </summary>
     /// <param name="email">Email user</param>
+    /// <param name="name">Name user</param>
     /// <returns>User properties</returns>
     [HttpGet]
     [ProducesResponseType(typeof(List<ResponseUserDto>), StatusCodes.Status200OK)]
@@ -67,6 +68,35 @@ public class UserController : ControllerBase
         }
 
         return Ok(response);
+    }
+
+    /// <summary>
+    /// Get user by Id, requires an Admin or User token
+    /// </summary>
+    /// <param name="Id">Id user</param>
+    /// <returns>User properties</returns>
+    [HttpGet("id")]
+    [ProducesResponseType(typeof(ResponseUserDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [UserAuthorizeAtribute(AuthorizationPermissions.User, AuthorizationPermissions.Admin)]
+    public async Task<IActionResult> GetUserById([FromQuery] Guid Id)
+    {
+        var response = await _uservice.GetUserByIdAsync(Id);
+
+        if (response == null)
+        {
+            return NotFound();
+        }
+
+        var responseDto = new ResponseUserDto()
+        {
+            Id = response.Id,
+            Name = response.Name,
+            Email = response.Email,
+            Permission = response.Authorization.Permission.ToString(),
+        };
+
+        return Ok(responseDto);
     }
 
     /// <summary>

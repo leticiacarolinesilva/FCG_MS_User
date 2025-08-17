@@ -16,6 +16,7 @@ public class UserRepository : IUserRepository
     public async Task<User?> GetByIdAsync(Guid id)
     {
         return await _context.Users
+            .Include(u => u.Authorization)
             .FirstOrDefaultAsync(gl => gl.Id == id);
     }
 

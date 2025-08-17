@@ -6,7 +6,7 @@ services:
     container_name: user_api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=db_user;Username=users;Password=userpassword;
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=6002;Database=db_user;Username=users;Password=userpassword;
     ports:
       - "500:80"
     extra_hosts:
@@ -26,7 +26,7 @@ services:
       POSTGRES_PASSWORD: userpassword
       POSTGRES_DB: db_user
     ports:
-      - "5432:5432"
+      - "6002:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./src/DockerForPostgree/init.sql:/docker-entrypoint-initdb.d/init.sql

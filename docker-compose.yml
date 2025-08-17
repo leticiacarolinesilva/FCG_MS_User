@@ -1,0 +1,47 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: user_api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=db_user;Username=users;Password=userpassword;
+    ports:
+      - "500:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - user_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: users_postgres
+    environment:
+      POSTGRES_USER: users
+      POSTGRES_PASSWORD: userpassword
+      POSTGRES_DB: db_user
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./src/DockerForPostgree/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U users -d db_user"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - user_network
+    restart: unless-stopped
+
+networks:
+  user_network:
+    name: user_network
+
+volumes:
+  postgres_data:

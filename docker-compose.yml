@@ -6,9 +6,9 @@ services:
     container_name: user_api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=postgres;Port=6002;Database=db_user;Username=users;Password=userpassword;
+      - ConnectionStrings__DefaultConnection=Host=host.docker.internal;Port=6002;Database=db_user;Username=users;Password=userpassword
     ports:
-      - "500:80"
+      - "3002:80"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:

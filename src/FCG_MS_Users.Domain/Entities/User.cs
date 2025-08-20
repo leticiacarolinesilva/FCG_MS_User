@@ -54,6 +54,15 @@ public class User
         CreateAt = DateTime.UtcNow;
     }
 
+    public User(Guid id, string name, Email email, Password password)
+    {
+        Id = id;
+        SetName(name);
+        Email = email;
+        Password = password;
+        CreateAt = DateTime.UtcNow;
+    }
+
     /// <summary>
     /// Validation for user's name
     /// </summary>

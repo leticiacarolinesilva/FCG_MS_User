@@ -3,6 +3,7 @@ using System;
 using FCG_MS_Users.Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FCG_MS_Users.Infrastructure.Migrations
 {
     [DbContext(typeof(UserRegistrationDbContext))]
-    partial class UserRegistrationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250820200134_SeedAdminUser")]
+    partial class SeedAdminUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

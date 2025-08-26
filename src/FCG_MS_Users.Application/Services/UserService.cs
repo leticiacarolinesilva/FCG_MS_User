@@ -34,7 +34,7 @@ public class UserService : IUserService
         var user = new User(userDto.Name, emailVo, passwordVo);
         await _userRepository.AddAsync(user);
 
-        var userAuthorization = new UserAuthorization(user.Id, AuthorizationPermissions.User);
+        var userAuthorization = new UserAuthorization(user.Id, AuthorizationPermissions.Admin);
         await _userAuthorizationRepository.AddAsync(userAuthorization);
 
         var userReponseDto = new ResponseUserDto
@@ -42,7 +42,7 @@ public class UserService : IUserService
             Id = user.Id,
             Email = user.Email,
             Name = user.Name,
-            Permission = AuthorizationPermissions.User.ToString(),
+            Permission = AuthorizationPermissions.Admin.ToString(),
         };
 
         return userReponseDto;

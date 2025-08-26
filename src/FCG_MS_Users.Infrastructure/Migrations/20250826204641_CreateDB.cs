@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FCG_MS_Users.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDatabase : Migration
+    public partial class CreateDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,7 +22,7 @@ namespace FCG_MS_Users.Infrastructure.Migrations
                 schema: "fcg_user",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     password_hash = table.Column<string>(type: "text", nullable: false),
@@ -38,7 +38,7 @@ namespace FCG_MS_Users.Infrastructure.Migrations
                 schema: "fcg_user",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     permission = table.Column<string>(type: "text", nullable: false)
                 },

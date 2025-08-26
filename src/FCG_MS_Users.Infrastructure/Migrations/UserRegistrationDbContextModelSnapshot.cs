@@ -28,8 +28,7 @@ namespace FCG_MS_Users.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("uuid_generate_v4()");
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("CreateAt")
                         .ValueGeneratedOnAdd()
@@ -46,21 +45,13 @@ namespace FCG_MS_Users.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users", "fcg_user");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("bacbbe47-017e-49a0-bd1a-5bbc2a2ffaca"),
-                            Name = "Admin FIAP"
-                        });
                 });
 
             modelBuilder.Entity("FCG_MS_Users.Domain.Entities.UserAuthorization", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
-                        .HasColumnName("id")
-                        .HasDefaultValueSql("uuid_generate_v4()");
+                        .HasColumnName("id");
 
                     b.Property<string>("Permission")
                         .IsRequired()
@@ -76,14 +67,6 @@ namespace FCG_MS_Users.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("userAuthorizations", "fcg_user");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("95cbf698-2295-4ee5-a2fe-1d4bde8a6479"),
-                            Permission = "Admin",
-                            UserId = new Guid("bacbbe47-017e-49a0-bd1a-5bbc2a2ffaca")
-                        });
                 });
 
             modelBuilder.Entity("FCG_MS_Users.Domain.Entities.User", b =>
@@ -105,13 +88,6 @@ namespace FCG_MS_Users.Infrastructure.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    UserId = new Guid("bacbbe47-017e-49a0-bd1a-5bbc2a2ffaca"),
-                                    Value = "admin@fiap.com"
-                                });
                         });
 
                     b.OwnsOne("FCG_MS_Users.Domain.ValueObjects.Password", "Password", b1 =>
@@ -130,13 +106,6 @@ namespace FCG_MS_Users.Infrastructure.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    UserId = new Guid("bacbbe47-017e-49a0-bd1a-5bbc2a2ffaca"),
-                                    HasedValue = "100000.pbPQTpVLfm103U12g0gaTQ==.J3pVae2Sl9rKsuJDC7jci69KXk0/X21y0M0lYZmBo+E="
-                                });
                         });
 
                     b.Navigation("Email")

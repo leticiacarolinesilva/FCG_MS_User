@@ -45,12 +45,14 @@ public class UserRegistrationDbContext : DbContext
         });
 
         var adminId = Guid.Parse("bacbbe47-017e-49a0-bd1a-5bbc2a2ffaca");
+        var adminAuthId = Guid.Parse("95cbf698-2295-4ee5-a2fe-1d4bde8a6479");
 
         modelBuilder.Entity<User>().HasData(
             new
             {
                 Id = adminId,
-                Name = "Admin FIAP"
+                Name = "Admin FIAP",
+                CreateAt = DateTime.UtcNow
             }
         );
 
@@ -70,17 +72,14 @@ public class UserRegistrationDbContext : DbContext
             }
         );
 
-        modelBuilder.Entity<UserAuthorization>(entity =>
-        {
-            entity.HasData(
-                new
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = adminId,
-                    Permission = AuthorizationPermissions.Admin
-                }
-            );
-        });
+        modelBuilder.Entity<UserAuthorization>().HasData(
+            new
+            {
+                Id = adminAuthId,
+                UserId = adminId,
+                Permission = AuthorizationPermissions.Admin
+            }
+        );
 
         base.OnModelCreating(modelBuilder);
     }

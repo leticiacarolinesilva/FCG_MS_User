@@ -57,7 +57,7 @@ public class UserController : ControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(List<ResponseUserDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [UserAuthorizeAtribute(AuthorizationPermissions.Admin)]
+    [UserAuthorizeAtribute(AuthorizationPermissions.Admin, AuthorizationPermissions.User)]
     public async Task<IActionResult> GetUser([FromQuery] string? email, string? name)
     {
         var response = await _uservice.SearchUsersAsync(email, name);

@@ -13,7 +13,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
-      - user_network
+      - fcg_network
     depends_on:
       postgres:
         condition: service_healthy
@@ -23,9 +23,9 @@ services:
     image: postgres:15-alpine
     container_name: users_postgres_v2
     environment:
-      POSTGRES_USER: users
-      POSTGRES_PASSWORD: userpassword
-      POSTGRES_DB: db_user
+      - POSTGRES_USER=users
+      - POSTGRES_PASSWORD=userpassword
+      - POSTGRES_DB=db_user
     ports:
       - "6002:5432"
     volumes:
@@ -37,13 +37,11 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - user_network
+      - fcg_network
     restart: unless-stopped
 
 networks:
-  user_network:
+  fcg_network: 
     external: true
-    name: fcg_network
-
 volumes:
   postgres_data:

@@ -23,7 +23,6 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FCG_MS_Users.Application\FCG_MS_Users.Application.csproj" />
     <ProjectReference Include="..\FCG_MS_Users.Domain\FCG_MS_Users.Domain.csproj" />
   </ItemGroup>
 

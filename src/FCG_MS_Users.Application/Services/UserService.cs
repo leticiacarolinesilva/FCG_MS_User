@@ -5,6 +5,7 @@ using FCG_MS_Users.Domain.Enums;
 using FCG_MS_Users.Domain.Exceptions;
 using FCG_MS_Users.Domain.Interfaces;
 using FCG_MS_Users.Domain.ValueObjects;
+using FCG_MS_Users.Infrastructure.ExternalClients.Interfaces;
 
 namespace FCG_MS_Users.Application.Services;
 
@@ -12,13 +13,16 @@ public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly IUserAuthorizationRepository _userAuthorizationRepository;
+    private readonly IUserNotificationClient _userNotificationClient;
 
     public UserService(
         IUserRepository userRepository,
-        IUserAuthorizationRepository userAuthorizationRepository)
+        IUserAuthorizationRepository userAuthorizationRepository,
+        IUserNotificationClient userNotificationClient)
     {
         _userRepository = userRepository;
         _userAuthorizationRepository = userAuthorizationRepository;
+        _userNotificationClient = userNotificationClient;
     }
 
     public async Task<ResponseUserDto> RegisterUserAsync(RegisterUserDto userDto)
@@ -44,6 +48,8 @@ public class UserService : IUserService
             Name = user.Name,
             Permission = AuthorizationPermissions.Admin.ToString(),
         };
+
+        await _userNotificationClient.SendemailAsync(userReponseDto.Email);
 
         return userReponseDto;
     }

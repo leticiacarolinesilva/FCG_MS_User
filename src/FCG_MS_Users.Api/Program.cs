@@ -1,5 +1,7 @@
 using FCG_MS_Users.Api.Extensions;
 using FCG_MS_Users.Infra;
+using FCG_MS_Users.Infrastructure.ExternalClients;
+using FCG_MS_Users.Infrastructure.ExternalClients.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +39,19 @@ builder.Services.AddHealthChecks()
         builder.Configuration.GetConnectionString("DefaultConnection")!,
         name: "PostgreSQL");
 
+var uriNotification = builder.Configuration["UserNotification:Uri"];
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+if (string.IsNullOrEmpty(uriNotification))
+{
+    throw new ArgumentException("User Client URI is not configured.", nameof(uriNotification));
+}
+
+builder.Services.AddHttpClient<IUserNotificationClient, UserNotificationClient>(client =>
+{
+    client.BaseAddress = new Uri(uriNotification);
+});
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -50,6 +65,7 @@ using (var scope = app.Services.CreateScope())
     var dbContext = scope.ServiceProvider.GetRequiredService<UserRegistrationDbContext>();
     dbContext.Database.Migrate();
 }
+
 
 app.UseHttpsRedirection();
 

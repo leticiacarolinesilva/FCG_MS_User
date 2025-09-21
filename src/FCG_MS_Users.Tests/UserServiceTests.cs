@@ -4,6 +4,7 @@ using FCG_MS_Users.Domain.Entities;
 using FCG_MS_Users.Domain.Exceptions;
 using FCG_MS_Users.Domain.Interfaces;
 using FCG_MS_Users.Domain.ValueObjects;
+using FCG_MS_Users.Infrastructure.ExternalClients.Interfaces;
 using Moq;
 using Xunit;
 
@@ -13,16 +14,19 @@ public class UserServiceTests
 {
     private readonly Mock<IUserRepository> _userRepositoryMock;
     private readonly Mock<IUserAuthorizationRepository> _userAuthorizationRepositoryMock;
+    private readonly Mock<IUserNotificationClient> _userNotificationClient;
     private readonly UserService _userService;
 
     public UserServiceTests()
     {
         _userRepositoryMock = new Mock<IUserRepository>();
         _userAuthorizationRepositoryMock = new Mock<IUserAuthorizationRepository>();
+        _userNotificationClient = new Mock<IUserNotificationClient>();
 
         _userService = new UserService(
             _userRepositoryMock.Object,
-            _userAuthorizationRepositoryMock.Object);
+            _userAuthorizationRepositoryMock.Object,
+            _userNotificationClient.Object);
     }
 
     [Fact]

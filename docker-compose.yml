@@ -7,6 +7,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Host=host.docker.internal;Port=6002;Database=db_user;Username=users;Password=userpassword
+      - UserNotification__Uri=http://usernotification:80
     ports:
       - "5010:80"
     extra_hosts:
@@ -41,7 +42,7 @@ services:
 
 networks:
   user_network:
-    name: user_network
+    external: true
 
 volumes:
   postgres_data:

@@ -13,6 +13,7 @@
 	
   <ItemGroup>
     <ProjectReference Include="..\FCG_MS_Users.Domain\FCG_MS_Users.Domain.csproj" />
+    <ProjectReference Include="..\FCG_MS_Users.Infrastructure\FCG_MS_Users.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

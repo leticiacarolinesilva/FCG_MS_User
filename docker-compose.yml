@@ -43,6 +43,7 @@ services:
 networks:
   user_network:
     external: true
+    name: fcg_network
 
 volumes:
   postgres_data:

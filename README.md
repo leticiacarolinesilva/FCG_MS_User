@@ -1,5 +1,5 @@
 # FCG_MS_User
-Este microserviço faz parte do ecossistema FIAP Cloud Games e é responsável pelo cadastro, autenticação e gerenciamento de usuários. O projeto foi migrado de uma aplicação monolítica para uma arquitetura moderna, adotando Docker, integração contínua (CI/CD) e deployment em ambiente AWS.
+Este Teste de microserviço faz parte do ecossistema FIAP Cloud Games e é responsável pelo cadastro, autenticação e gerenciamento de usuários. O projeto foi migrado de uma aplicação monolítica para uma arquitetura moderna, adotando Docker, integração contínua (CI/CD) e deployment em ambiente AWS.
 
 ## Principais Tecnologias
 - .NET 8 – API estruturada em camadas de domínio, aplicação e infraestrutura

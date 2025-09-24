@@ -31,8 +31,8 @@ jobs:
 
     - name: Tag para o ECR
       run: |
-        # docker tag users:latest ${{ secrets.ECR_REPOSITORY }}:latest
-        docker tag users:latest ${{ secrets.ECR_REPOSITORY }}:latest
+        # docker tag fcg-user:latest ${{ secrets.ECR_REPOSITORY }}:latest
+        docker tag fcg-user:latest ${{ secrets.ECR_REPOSITORY }}:latest
     - name: Push no ECR
       run: |
         docker push ${{ secrets.ECR_REPOSITORY }}:latest

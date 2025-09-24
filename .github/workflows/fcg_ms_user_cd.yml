@@ -32,8 +32,8 @@ jobs:
     - name: Tag para o ECR
       run: |
         # docker tag fcg-user:latest ${{ secrets.ECR_REPOSITORY }}:latest
-        # docker tag fcg-user:latest ${{ secrets.ECR_REPOSITORY }}:latest
-        docker tag fcg-user:latest 120671645922.dkr.ecr.us-east-1.amazonaws.com/fcg-user:latest
+          docker tag fcg-user:latest ${{ secrets.ECR_REPOSITORY }}:latest
+        # docker tag fcg-user:latest 120671645922.dkr.ecr.us-east-1.amazonaws.com/fcg-user:latest
     - name: Push no ECR
       run: |
         docker push ${{ secrets.ECR_REPOSITORY }}:latest

@@ -22,7 +22,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var jwtKey = builder.Configuration.GetValue<string>("Jwt:Key");
 
@@ -65,11 +64,8 @@ builder.Services.AddHttpClient<IUserNotificationClient, UserNotificationClient>(
 });
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 using (var scope = app.Services.CreateScope())
 {

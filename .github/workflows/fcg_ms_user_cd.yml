@@ -39,9 +39,9 @@ jobs:
         docker push ${{ secrets.ECR_REPOSITORY }}:latest
 
     - name: Configurar o kubectl
-      uses: aws-actions/eks-setup-kubectl@v4
+      uses: azure/setup-kubectl@v
       with:
-        version: '1.30'
+        version: 'latest'
           
     - name: Obter credenciais do cluster EKS
       run: |

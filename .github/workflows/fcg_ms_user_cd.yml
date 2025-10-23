@@ -39,7 +39,7 @@ jobs:
         docker push ${{ secrets.ECR_REPOSITORY }}:latest
 
     - name: Configurar o kubectl
-      uses: azure/setup-kubectl@v
+      uses: azure/setup-kubectl@v3
       with:
         version: 'latest'
           

@@ -1,4 +1,3 @@
-
 name: CD - Deploy Docker no Amazon ECR
 
 on:
@@ -31,9 +30,8 @@ jobs:
 
     - name: Tag para o ECR
       run: |
-        # docker tag fcg-user:latest ${{ secrets.ECR_REPOSITORY }}:latest
-          docker tag fcg-user:latest ${{ secrets.ECR_REPOSITORY }}:latest
-        # docker tag fcg-user:latest 120671645922.dkr.ecr.us-east-1.amazonaws.com/fcg-user:latest
+        docker tag fcg-user:latest ${{ secrets.ECR_REPOSITORY }}:latest
+
     - name: Push no ECR
       run: |
         docker push ${{ secrets.ECR_REPOSITORY }}:latest
@@ -56,5 +54,8 @@ jobs:
 
     - name: Aplicar Deployment no EKS
       run: |
-        kubectl set image deployment/users-deployment users=${{ secrets.ECR_REPOSITORY }}:latest --namespace default
+        # Primeiro aplicar os manifestos
+        kubectl apply -f k8s/ --validate=false
+        # Depois fazer rollout restart para pegar nova imagem
+        kubectl rollout restart deployment/users-deployment --namespace default
         kubectl rollout status deployment/users-deployment --namespace default

@@ -40,6 +40,12 @@ jobs:
       uses: azure/setup-kubectl@v3
       with:
         version: 'latest'
+        
+    - name: Debug - Testar conexão EKS
+      run: |
+        echo "Testando conexão com o cluster..."
+        kubectl cluster-info
+        kubectl get nodes
           
     - name: Obter credenciais do cluster EKS
       run: |

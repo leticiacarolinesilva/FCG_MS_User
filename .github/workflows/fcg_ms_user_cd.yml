@@ -50,7 +50,8 @@ jobs:
         kubectl create secret generic fcg-ms-user-secret \
           --from-literal=ConnectionStrings__DefaultConnection="${{ secrets.USER_DB_CONNECTION }}" \
           --from-literal=UserNotification__Uri="${{ secrets.USER_NOTIFICATION_URI }}" \
-          --dry-run=client -o yaml | kubectl apply -f -
+          --dry-run=client -o yaml | kubectl apply -f - --validate=false
+
 
     - name: Aplicar Deployment no EKS
       run: |

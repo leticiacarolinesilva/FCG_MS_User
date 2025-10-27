@@ -41,7 +41,7 @@ jobs:
     - name: Configurar o kubectl
       uses: azure/setup-kubectl@v3
       with:
-        version: '1.31'
+        version: 'latest'
           
     - name: Obter credenciais do cluster EKS
       run: |
